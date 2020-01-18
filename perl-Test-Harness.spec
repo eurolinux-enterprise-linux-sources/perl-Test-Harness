@@ -1,6 +1,6 @@
 Name:           perl-Test-Harness
 Version:        3.28
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        Run Perl standard test scripts with statistics
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -81,9 +81,6 @@ make test
 %{_mandir}/man3/*
 
 %changelog
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 3.28-2
-- Mass rebuild 2013-12-27
-
 * Fri May 03 2013 Petr Pisar <ppisar@redhat.com> - 3.28-1
 - 3.28 bump
 
