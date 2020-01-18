@@ -1,11 +1,14 @@
 Name:           perl-Test-Harness
 Version:        3.28
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Run Perl standard test scripts with statistics
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Test-Harness/
 Source0:        http://www.cpan.org/authors/id/O/OV/OVID/Test-Harness-%{version}.tar.gz
+# Do not warn on tainted test without PERL5LIB environment variable,
+# bug #1091376, CPAN RT#85106, in 3.29
+Patch0:         Test-Harness-3.28-Do-not-warn-on-tainted-test-without-PERL5LIB-envirom.patch
 BuildArch:      noarch
 BuildRequires:  perl
 BuildRequires:  perl(ExtUtils::MakeMaker)
@@ -60,6 +63,7 @@ writing new code consider using TAP::Harness directly instead.
 
 %prep
 %setup -q -n Test-Harness-%{version}
+%patch0 -p1
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
@@ -81,6 +85,14 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Wed Aug 12 2015 Scientific Linux Auto Patch Process <SCIENTIFIC-LINUX-DEVEL@LISTSERV.FNAL.GOV>
+- Eliminated rpmbuild "bogus date" error due to inconsistent weekday,
+  by assuming the date is correct and changing the weekday.
+
+* Mon Apr 28 2014 Petr Pisar <ppisar@redhat.com> - 3.28-3
+- Do not warn on tainted test without PERL5LIB environment variable
+  (bug #1091376)
+
 * Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 3.28-2
 - Mass rebuild 2013-12-27
 
